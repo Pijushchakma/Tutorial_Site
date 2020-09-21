@@ -1,0 +1,44 @@
+<!-- <h2>Weekly Coding Challenge #1: Sign in/up Form</h2> -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="{% url 'register' %}" method="POST">
+                {% csrf_token %}
+                <h1>Sign Up</h1>
+                <input type="text" placeholder=" First Name" name="first_name" required/>
+                <input type="text" placeholder=" Last Name" name="last_name" required/>
+                <input type="text" placeholder=" User Name" name="user_name"required/>
+                <input type="email" placeholder="Email" name="email" required/>
+                <input type="password" placeholder="Password" name="password1" required/>
+                <input type="password" placeholder=" Confirm Password"name="password2" required/>
+                {% for msg in messages %}
+                <p style="color: red;">{{msg}}</p>
+                {% endfor %}
+                <button>Sign Up</button>
+            </form>
+        </div>
+        
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome </h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/registration.js' %}"></script>
+    
+</body>
+</html>

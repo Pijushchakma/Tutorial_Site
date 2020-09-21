@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tailwindcss/ui@latest/dist/tailwind-ui.min.css">
+    <link rel="stylesheet" href="{% static 'css/content.css' %}">
+    <style>
+        .heroman {
+            height: 400px;
+            width: 720px;
+        }
+
+        .nam {
+            color: orangered;
+        }
+
+        .container1 {
+            width: 100%;
+            margin: 5% 10%;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="text-gray-700 body-font">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+            <nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
+                <a class="mr-5 hover:text-gray-900" href="{% url 'profile' %}">Profile</a>
+                <a class="mr-5 hover:text-gray-900" href="{% url 'addcourse' %}">Add Course</a>
+                <a class="mr-5 hover:text-gray-900" href="{% url 'contact' %}">Contact</a>
+                
+            </nav>
+            <a
+                class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-gray-900 lg:items-center lg:justify-center mb-4 md:mb-0" href="{% url 'index' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+                    stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-pink-500 rounded-full"
+                    viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                </svg>
+                <span class="ml-3 text-xl">giis</span>
+            </a>
+            <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0 ">
+
+                {% if user.is_authenticated %}
+                <p class="mr-4">Hello,</p>
+                <p class="mr-4 nam"> {{user.first_name}}</p>
+                <button
+                    class="inline-flex items-center bg-gray-200 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0 mr-1"><a
+                        href="{% url 'logout' %}">Log out</a>
+
+                </button>
+                {% else %}
+                <button
+                    class="inline-flex items-center bg-gray-200 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0 mr-1"><a
+                        href="{% url 'login' %}">Log in</a>
+                </button>
+                <button
+                    class="inline-flex items-center bg-gray-200 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0 mr-1"><a
+                        href="{% url 'register' %}">Sign Up</a>
+                </button>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+    <hr>
+    <div class="container1">
+        {% if message %}
+        {{message}}
+        {% else %}
+
+
+        {{content.ContentName}} <br>
+        {{content.descriptionContent |safe}}
+        {{content.content |safe}}
+        {% if mark %}
+        <button class="mark baal" id="{{content.Coursename}}"> Mark Read</button>
+        {% endif %}
+        {% endif %}
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="{% static 'js/contentDetails.js' %}"></script>
+</body>
+
+</html>
